@@ -6,8 +6,7 @@ public class Interface{
 	public static void main(String[] args){
 
 		Directory directory = new Directory();
-		directory.test();
-
+		directory.read_person();
 
 	}
 }
