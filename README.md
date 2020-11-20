@@ -14,9 +14,6 @@ During each iteration, each member of your group should expect to work on one to
 
 Use these guidelines to scope the work of this assignment and really focus on generating information that will guide your implementation efforts during the last part of the semester.
 
-## Part 1: Design Phase Introduction
-Your deliverable for Project 4 is a single PDF document that contains the information listed below:
-
 ### Project Summary
 <ul>
   <li>What is the project called?</li>
