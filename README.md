@@ -1,6 +1,8 @@
 # OOAD Project
 
-https://docs.google.com/document/d/1KaLtAzs-iF1KiVXu36pwWANQBRaz6lLwOAewJ1m7U6g/edit
+HW4 Summary: https://docs.google.com/document/d/1KaLtAzs-iF1KiVXu36pwWANQBRaz6lLwOAewJ1m7U6g/edit
+
+HW5 Summary: https://docs.google.com/document/d/1gcwlO4tlB0L5lGjwmeDBQxFFsxa2p_I-Qqb1uDtQTiw/edit
 
 NOTE: Keep this readme file; this will be used throughout the project to document progress.
 
