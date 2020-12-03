@@ -22,7 +22,11 @@ public abstract class Person{
 	    this.playSpan = playSpan;
 	}
 
-	public String get_type(){
-		return "person";
+	public String get_id(){
+		return this.id;
+	}
+
+	public void get_type(){
+		System.out.println("Person");
 	}
 }

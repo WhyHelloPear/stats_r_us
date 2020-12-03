@@ -8,14 +8,44 @@ import java.io.IOException;
 public class Directory{
 	private RecordFactory recordFactory;
 
-	private List<Person> players = new ArrayList<Person>();
-	private List<Person> managers = new ArrayList<Person>();
+	private List<Person> persons = new ArrayList<Person>();
+	private List<Franchise> franchises = new ArrayList<Franchise>();
+
+
+	private List<String> get_managers(){
+		String line = "";
+        String cvsSplitBy = ",";
+        Integer i = 0;
+		List<String> managers = new ArrayList<String>();
+        try(BufferedReader br = new BufferedReader(new FileReader("../data/Managers.csv"))) {
+
+            while ((line = br.readLine()) != null) {
+        		if(i != 0){
+	                // use comma as separator
+	                String[] info = line.split(cvsSplitBy);
+	                if(managers.contains(info[0]) == false){
+	                	managers.add(info[0]);
+	                }
+                }
+                i = 1;
+            }
+
+        }
+        catch(IOException e) {
+            e.printStackTrace();
+        }
+        return managers;
+	}
 
  	public void read_person(){
         String line = "";
         String cvsSplitBy = ",";
         Integer i = 0;
-        try (BufferedReader br = new BufferedReader(new FileReader("../data/People.csv"))) {
+        Integer count = 0;
+        
+        List<String> managers = get_managers();
+
+        try(BufferedReader br = new BufferedReader(new FileReader("../data/People.csv"))) {
 
             while ((line = br.readLine()) != null) {
 
@@ -57,7 +87,55 @@ public class Directory{
 						throw_arm = "hold";
 						playSpan = "hold";
 					}
-	                players.add(new Player(id, name, age, birthplace, weight, height, bats, throw_arm, playSpan));
+					if(managers.contains(id)){
+						persons.add(new Manager(id, name, age, birthplace, weight, height, bats, throw_arm, playSpan));
+						count += 1;
+					}
+					else{
+						persons.add(new Player(id, name, age, birthplace, weight, height, bats, throw_arm, playSpan));
+					}
+	                
+                }
+                i = 1;
+
+            }
+
+        }
+        catch(IOException e) {
+            e.printStackTrace();
+        }
+        Integer size = persons.size();
+        System.out.println("Number of persons added: ");
+        System.out.println(size);
+
+        System.out.println("Number of managers added: ");
+        System.out.println(count);
+ 	}
+
+ 	public void read_franchise(){
+ 		String line = "";
+        String cvsSplitBy = ",";
+        Integer i = 0;
+        try (BufferedReader br = new BufferedReader(new FileReader("../data/TeamsFranchises.csv"))) {
+
+            while ((line = br.readLine()) != null) {
+
+        		if(i != 0){
+	                // use comma as separator
+	                String[] info = line.split(cvsSplitBy);
+
+	                String id = info[0];
+					String name = info[1];
+					Boolean active;
+
+					if(info[2] == "Y"){
+						active = true;
+					}
+					else{
+						active = false;
+					}
+					
+	                franchises.add(new Franchise(id, name, active));
                 }
                 i = 1;
 
@@ -66,8 +144,19 @@ public class Directory{
         } catch (IOException e) {
             e.printStackTrace();
         }
-        Integer size = players.size();
-        System.out.println("Number of persons added: ");
-        System.out.print(size);
+        Integer size = franchises.size();
+        System.out.println("Number of franchises added: ");
+        System.out.println(size);
+ 	}
+
+ 	public Person find_person(String id){
+ 		Person person = null;
+ 		for(int i = 0; i < persons.size(); i++){
+ 			person = persons.get(i);
+ 			if(person.get_id().equals(id)){
+ 				break;
+ 			}
+ 		}
+ 		return person;
  	}
 }

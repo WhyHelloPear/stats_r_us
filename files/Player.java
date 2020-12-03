@@ -4,4 +4,8 @@ public class Player extends Person{
 	    super(id, name, age, birthplace, weight, height, bats, throw_arm, playSpan);
 	}
 
+	public void get_type(){
+		System.out.println("Player");
+	}
+
 }
