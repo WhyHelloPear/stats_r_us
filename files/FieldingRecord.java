@@ -1,7 +1,7 @@
 public class FieldingRecord extends Record{
 
 		FieldingRecord(){
-			String type = "fielding";
+			this.type = "fielding";
 		}
 
 }
