@@ -1,4 +1,5 @@
 public class ManagerRecord extends Record{
+	Person manager;
 	Integer games_played;
 	Integer games_won;
 	Integer games_lost;
@@ -9,8 +10,8 @@ public class ManagerRecord extends Record{
 		super(franchise, league, year, "manager");
 	}
 
-	public void set_stats(Integer games_played, Integer games_won, Integer games_lost, Integer rank){
-		System.out.println("Setting stats for manager record!");
+	public void set_stats(Person manager, Integer games_played, Integer games_won, Integer games_lost, Integer rank){
+		this.manager = manager;
 		this.games_played = games_played;
 		this.games_won = games_won;
 		this.games_lost = games_lost;

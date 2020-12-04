@@ -31,17 +31,6 @@ public class Directory{
 		return line;
 	}
 
-	private void read(String[] info){
-		for(int i = 0; i < info.length; i++){
-			String value = info[i];
-			String k = String.valueOf(i);
-			String holder = ": ";
-			String n = value.concat(holder);
-			n = n.concat(k);
-			System.out.println(n);
-		}
-	}
-
  	public Person find_person(String id){
  		Person person = null;
  		for(int i = 0; i < persons.size(); i++){
@@ -113,7 +102,7 @@ public class Directory{
         try(BufferedReader br = new BufferedReader(new FileReader("../data/People.csv"))) {
 
             while ((line = br.readLine()) != null) {
-
+            	line = fix_line(line);
         		if(i != 0){
 	                // use comma as separator
 	                String[] info = line.split(cvsSplitBy);
@@ -184,7 +173,7 @@ public class Directory{
         try (BufferedReader br = new BufferedReader(new FileReader("../data/TeamsFranchises.csv"))) {
 
             while ((line = br.readLine()) != null) {
-
+            	line = fix_line(line);
         		if(i != 0){
 	                // use comma as separator
 	                String[] info = line.split(cvsSplitBy);
@@ -223,6 +212,7 @@ public class Directory{
         try(BufferedReader br = new BufferedReader(new FileReader("../data/teams.csv"))) {
 
             while ((line = br.readLine()) != null) {
+            	line = fix_line(line);
         		if(i != 0){
 	                // use comma as separator
 	                String[] info = line.split(cvsSplitBy);
@@ -460,28 +450,60 @@ public class Directory{
                 }
                 i = 1;
             }
-
         }
         catch(IOException e) {
             e.printStackTrace();
         }
  	}
 
- // 	String[] info = line.split(cvsSplitBy);
-	// read(line);
-	// info = fill_blanks(info);
+ 	public void read_managers(){
+ 		String line = "";
+        String cvsSplitBy = ",";
+        Integer i = 0;
 
+        try(BufferedReader br = new BufferedReader(new FileReader("../data/pitching.csv"))) {
 
+            while ((line = br.readLine()) != null) {
+            	line = fix_line(line);
+        		if(i != 0){
+	                // use comma as separator
+	                String[] info = line.split(cvsSplitBy);
+	                info = fill_blanks(info);
 
+	                String manager_id = info[0];
+					String year = info[1];
+					String team_id = info[2];
+					String league = info[3];
 
+					Person manager = find_person(manager_id);
+					// get franchise object that will be reference in record
+					Franchise franchise = find_team(team_id);
+
+	                // instantiate pitching record
+	                ManagerRecord record = new ManagerRecord(franchise, league, year);
+
+	                Integer games_played = Integer.parseInt(info[5]);
+					Integer games_won = Integer.parseInt(info[6]);
+					Integer games_lost = Integer.parseInt(info[7]);
+					Integer rank = Integer.parseInt(info[8]);
+
+					record.set_stats(manager, games_played, games_won, games_lost, rank);
+					records.add(record);
+                }
+                i = 1;
+            }
+        }
+        catch(IOException e) {
+            e.printStackTrace();
+        }
+ 	}
 
  	public void read_records(){
  		read_teams();
  		read_batting();
  		read_fielding();
  		read_pitching();
+ 		read_managers();
  		System.out.println(records.size());
  	}
-
-
 }
