@@ -1,5 +1,7 @@
 # OOAD Project
 
+### Data source: https://github.com/chadwickbureau/baseballdatabank/tree/master/core
+
 HW4 Summary: https://docs.google.com/document/d/1KaLtAzs-iF1KiVXu36pwWANQBRaz6lLwOAewJ1m7U6g/edit
 
 HW5 Summary: https://docs.google.com/document/d/1gcwlO4tlB0L5lGjwmeDBQxFFsxa2p_I-Qqb1uDtQTiw/edit
