@@ -6,6 +6,8 @@ HW4 Summary: https://docs.google.com/document/d/1KaLtAzs-iF1KiVXu36pwWANQBRaz6lL
 
 HW5 Summary: https://docs.google.com/document/d/1gcwlO4tlB0L5lGjwmeDBQxFFsxa2p_I-Qqb1uDtQTiw/edit
 
+HW6 Summary: https://docs.google.com/document/d/1cZAF9Ue68Z40LzQ_Wmj9HY7xlBLuu_iXZzvNH9SXT6Y/edit?ts=5fca4307
+
 NOTE: Keep this readme file; this will be used throughout the project to document progress.
 
 The Semester Project
