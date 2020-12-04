@@ -6,19 +6,31 @@ import java.io.FileReader;
 import java.io.IOException;
 
 public class Directory{
-	private RecordFactory recordFactory;
 
-	private List<Person> persons = new ArrayList<Person>();
-	private List<Franchise> franchises = new ArrayList<Franchise>();
-	private List<Record> records = new ArrayList<Record>();
+	public List<Person> persons = new ArrayList<Person>();
+	public List<Franchise> franchises = new ArrayList<Franchise>();
+	public List<Record> records = new ArrayList<Record>();
 
+
+	public List<FranchiseRecord> get_franchise_records(String id) {
+
+		List<FranchiseRecord> record_list = new ArrayList<FranchiseRecord>();
+
+		for (Record r : records) {
+			if (r instanceof FranchiseRecord && r.get_franchise().get_id().equals(id) ) {
+				record_list.add((FranchiseRecord) r);
+			}
+		}
+
+		return record_list;
+	}
 
 	private List<String> get_managers(){
 		String line = "";
         String cvsSplitBy = ",";
         Integer i = 0;
 		List<String> managers = new ArrayList<String>();
-        try(BufferedReader br = new BufferedReader(new FileReader("../data/Managers.csv"))) {
+        try(BufferedReader br = new BufferedReader(new FileReader("data/Managers.csv"))) {
 
             while ((line = br.readLine()) != null) {
         		if(i != 0){
@@ -92,7 +104,7 @@ public class Directory{
         
         List<String> managers = get_managers();
 
-        try(BufferedReader br = new BufferedReader(new FileReader("../data/People.csv"))) {
+        try(BufferedReader br = new BufferedReader(new FileReader("data/People.csv"))) {
 
             while ((line = br.readLine()) != null) {
 
@@ -163,7 +175,7 @@ public class Directory{
  		String line = "";
         String cvsSplitBy = ",";
         Integer i = 0;
-        try (BufferedReader br = new BufferedReader(new FileReader("../data/TeamsFranchises.csv"))) {
+        try (BufferedReader br = new BufferedReader(new FileReader("data/TeamsFranchises.csv"))) {
 
             while ((line = br.readLine()) != null) {
 
@@ -213,7 +225,7 @@ public class Directory{
         String cvsSplitBy = ",";
         Integer i = 0;
 
-        try(BufferedReader br = new BufferedReader(new FileReader("../data/teams.csv"))) {
+        try(BufferedReader br = new BufferedReader(new FileReader("data/teams.csv"))) {
 
             while ((line = br.readLine()) != null) {
  
@@ -282,7 +294,7 @@ public class Directory{
 		String cvsSplitBy = ",";
 		Integer i = 0;
 
-		try(BufferedReader br = new BufferedReader(new FileReader("../data/Batting.csv"))) {
+		try(BufferedReader br = new BufferedReader(new FileReader("data/Batting.csv"))) {
 			while ((line = br.readLine()) != null) {
 				char holder = line.charAt(line.length()-1);
 				String last = String.valueOf(holder);  
