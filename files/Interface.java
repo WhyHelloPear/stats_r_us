@@ -15,8 +15,9 @@ public class Interface{
 		directory.read_franchise();
 		directory.read_teams();
 		directory.read_batting();
+		directory.read_records();
 
 		return directory;
-		directory.read_records();
+
 	}
 }

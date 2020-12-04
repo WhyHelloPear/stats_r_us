@@ -54,8 +54,6 @@ public class webserver {
                 ArrayList<String> subpath = new ArrayList(path);
                 subpath.remove(0);
 
-                System.out.println("subpath: " + subpath.toString());
-                System.out.println("path.get(0): " + path.get(0));
 
                 response = switch (path.get(0)) {
                     case "list" -> handle_list(subpath); // Player List or Franchise List Requested
