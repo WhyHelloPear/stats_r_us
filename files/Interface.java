@@ -9,6 +9,7 @@ public class Interface{
 		directory.read_person();
 		directory.read_franchise();
 		directory.read_teams();
+		directory.read_batting();
 
 	}
 }

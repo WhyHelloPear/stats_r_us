@@ -39,16 +39,16 @@ public class Directory{
 	}
 
 	private String[] fill_blanks(String[] info){
+
 		for(int i = 0; i < info.length; i++){
 			if(info[i].equals("")){
 				info[i] = "0";
 			}
 		}
+
 		return info;
 	}
 
-				// String[] info = line.split(cvsSplitBy);
-    // 			read(info);
 	private void read(String[] info){
 		for(int i = 0; i < info.length; i++){
 			String value = info[i];
@@ -101,7 +101,7 @@ public class Directory{
 	                String[] info = line.split(cvsSplitBy);
 
 	                String id = info[0];
-					String name = info[13] + info[14];
+					String name = info[13] + " " + info[14];
 
 					String birthdate = info[2]+"/"+info[3]+"/"+info[1];
 					Integer age = 0; //need a function to find differences between dates
@@ -225,7 +225,7 @@ public class Directory{
 	                String league = info[1];
 	                String team_id = info[2];
 	                String franchise_id = info[3];
-	                
+
 	                // get franchise object that will be reference in record
 	                Franchise franchise = find_franchise(franchise_id);
 	                franchise.add_team(team_id);
@@ -263,7 +263,6 @@ public class Directory{
 					Integer errors = Integer.parseInt(info[37]);
 					Integer double_plays = Integer.parseInt(info[38]);
 					Float fielding_percentage = Float.parseFloat(info[39]);
-
 					record.set_stats(rank, games, games_won, games_lost, runs, at_bats, hits, doubles, triples, home_runs, walks, strike_outs, stolen_bases, caught_stealing, hit_by_pitch, sacrifice_flies, earned_runs_allowed, earned_runs_average, complete_games, shutouts, saves, hits_allowed, home_runs_allowed, walks_allowed, pitcher_strike_outs, errors, double_plays, fielding_percentage);
 					records.add(record);
                 }
@@ -276,6 +275,77 @@ public class Directory{
         }
         System.out.println(records.size());
  	}
+
+ 	//creates batting records and tracks teams that fall under a franchise
+ 	public void read_batting(){
+		String line = "";
+		String cvsSplitBy = ",";
+		Integer i = 0;
+
+		try(BufferedReader br = new BufferedReader(new FileReader("../data/Batting.csv"))) {
+			while ((line = br.readLine()) != null) {
+				char holder = line.charAt(line.length()-1);
+				String last = String.valueOf(holder);  
+				if(last.equals(",")){
+					line = line.concat("0");
+				}
+				if(i != 0){
+					// use comma as separator
+					String[] info = line.split(cvsSplitBy);
+
+
+					info = fill_blanks(info);
+					
+
+					String player_id = info[0];
+					String year = info[1];
+					String team_id = info[3];
+					String league = info[4];
+
+
+
+					Person player = find_person(player_id);
+					// get franchise object that will be reference in record
+					Franchise franchise = find_team(team_id);
+
+					// instantiate batting record
+					BattingRecord record = new BattingRecord(franchise, league, year);
+
+					record.set_player(player);
+					record.get_player();
+
+					Integer games = Integer.parseInt(info[5]);
+					Integer at_bats = Integer.parseInt(info[6]);
+					Integer runs = Integer.parseInt(info[7]);
+					Integer hits = Integer.parseInt(info[8]);
+					Integer doubles = Integer.parseInt(info[9]);
+					Integer triples = Integer.parseInt(info[10]);
+					Integer home_runs = Integer.parseInt(info[11]);
+					Integer rbi = Integer.parseInt(info[12]);
+					Integer stolen_bases = Integer.parseInt(info[13]);
+					Integer caught_stealing = Integer.parseInt(info[14]);
+					Integer walks = Integer.parseInt(info[15]);
+					Integer strike_outs = Integer.parseInt(info[16]);
+					Integer intentional_walks = Integer.parseInt(info[17]);
+					Integer hit_by_pitch = Integer.parseInt(info[18]);
+					Integer sacrifice_hits = Integer.parseInt(info[19]);
+					Integer sacrifice_flies = Integer.parseInt(info[20]);
+					Integer grounded_into_double_play = Integer.parseInt(info[21]);
+
+					record.set_stats(games, at_bats, runs, hits, doubles, triples, home_runs, rbi, stolen_bases, caught_stealing, walks, strike_outs, intentional_walks, hit_by_pitch, sacrifice_hits, sacrifice_flies, grounded_into_double_play);
+					records.add(record);
+
+				}
+				i += 1;
+			}
+
+		}
+		catch(IOException e) {
+			e.printStackTrace();
+		}
+		System.out.println(records.size());
+	}
+
 
 
 

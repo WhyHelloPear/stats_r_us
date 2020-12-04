@@ -35,7 +35,6 @@ public class FranchiseRecord extends Record{
 	}
 
 	public void set_stats(Integer rank, Integer games, Integer games_won, Integer games_lost, Integer runs, Integer at_bats, Integer hits, Integer doubles, Integer triples, Integer home_runs, Integer walks, Integer strike_outs, Integer stolen_bases, Integer caught_stealing, Integer hit_by_pitch, Integer sacrifice_flies, Integer earned_runs_allowed, Float earned_runs_average, Integer complete_games, Integer shutouts, Integer saves, Integer hits_allowed, Integer home_runs_allowed, Integer walks_allowed, Integer pitcher_strike_outs, Integer errors, Integer double_plays, Float fielding_percentage){
-		// System.out.println("setting stats for record!");
 		this.rank = rank;
 		this.games = games;
 		this.games_won = games_won;

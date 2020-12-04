@@ -26,6 +26,10 @@ public abstract class Person{
 		return this.id;
 	}
 
+	public String get_name(){
+		return this.name;
+	}
+
 	public void get_type(){
 		System.out.println("Person");
 	}
