@@ -17,5 +17,6 @@ public class Interface{
 		directory.read_batting();
 
 		return directory;
+		directory.read_records();
 	}
 }

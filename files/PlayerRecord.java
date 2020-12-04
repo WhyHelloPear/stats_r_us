@@ -1,5 +1,4 @@
 abstract class PlayerRecord extends Record{
-
 	Person player;
 
 	public PlayerRecord(Franchise franchise, String league, String year, String type){
