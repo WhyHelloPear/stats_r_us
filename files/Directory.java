@@ -6,37 +6,10 @@ import java.io.FileReader;
 import java.io.IOException;
 
 public class Directory{
-	private RecordFactory recordFactory;
 
-	private List<Person> persons = new ArrayList<Person>();
-	private List<Franchise> franchises = new ArrayList<Franchise>();
-	private List<Record> records = new ArrayList<Record>();
-
-
-	private List<String> get_managers(){
-		String line = "";
-        String cvsSplitBy = ",";
-        Integer i = 0;
-		List<String> managers = new ArrayList<String>();
-        try(BufferedReader br = new BufferedReader(new FileReader("../data/Managers.csv"))) {
-
-            while ((line = br.readLine()) != null) {
-        		if(i != 0){
-	                // use comma as separator
-	                String[] info = line.split(cvsSplitBy);
-	                if(managers.contains(info[0]) == false){
-	                	managers.add(info[0]);
-	                }
-                }
-                i = 1;
-            }
-
-        }
-        catch(IOException e) {
-            e.printStackTrace();
-        }
-        return managers;
-	}
+	public List<Person> persons = new ArrayList<Person>();
+	public List<Franchise> franchises = new ArrayList<Franchise>();
+	public List<Record> records = new ArrayList<Record>();
 
 	private String[] fill_blanks(String[] info){
 
@@ -59,6 +32,17 @@ public class Directory{
 			System.out.println(n);
 		}
 	}
+
+ 	public Person find_person(String id){
+ 		Person person = null;
+ 		for(int i = 0; i < persons.size(); i++){
+ 			person = persons.get(i);
+ 			if(person.get_id().equals(id)){
+ 				break;
+ 			}
+ 		}
+ 		return person;
+ 	}
 
 	//find franchise object by franchise id
  	public Franchise find_franchise(String id){
@@ -83,6 +67,31 @@ public class Directory{
  		}
  		return franchise;
  	}
+
+ 	private List<String> get_managers(){
+		String line = "";
+        String cvsSplitBy = ",";
+        Integer i = 0;
+		List<String> managers = new ArrayList<String>();
+        try(BufferedReader br = new BufferedReader(new FileReader("../data/Managers.csv"))) {
+
+            while ((line = br.readLine()) != null) {
+        		if(i != 0){
+	                // use comma as separator
+	                String[] info = line.split(cvsSplitBy);
+	                if(managers.contains(info[0]) == false){
+	                	managers.add(info[0]);
+	                }
+                }
+                i = 1;
+            }
+
+        }
+        catch(IOException e) {
+            e.printStackTrace();
+        }
+        return managers;
+	}
 
  	public void read_person(){
         String line = "";
@@ -196,17 +205,6 @@ public class Directory{
         System.out.println(size);
  	}
 
- 	public Person find_person(String id){
- 		Person person = null;
- 		for(int i = 0; i < persons.size(); i++){
- 			person = persons.get(i);
- 			if(person.get_id().equals(id)){
- 				break;
- 			}
- 		}
- 		return person;
- 	}
-
  	//creates franchise records and tracks teams that fall under a franchise
  	public void read_teams(){
  		String line = "";
@@ -273,7 +271,6 @@ public class Directory{
         catch(IOException e) {
             e.printStackTrace();
         }
-        System.out.println(records.size());
  	}
 
  	//creates batting records and tracks teams that fall under a franchise
@@ -311,8 +308,8 @@ public class Directory{
 					// instantiate batting record
 					BattingRecord record = new BattingRecord(franchise, league, year);
 
+					// attach player object to the record
 					record.set_player(player);
-					record.get_player();
 
 					Integer games = Integer.parseInt(info[5]);
 					Integer at_bats = Integer.parseInt(info[6]);
@@ -343,17 +340,78 @@ public class Directory{
 		catch(IOException e) {
 			e.printStackTrace();
 		}
-		System.out.println(records.size());
 	}
 
+	//creates fielding records and tracks teams that fall under a franchise
+ 	public void read_fielding(){
+ 		String line = "";
+        String cvsSplitBy = ",";
+        Integer i = 0;
 
+        try(BufferedReader br = new BufferedReader(new FileReader("../data/fielding.csv"))) {
+
+            while ((line = br.readLine()) != null) {
+            	char holder = line.charAt(line.length()-1);
+				String last = String.valueOf(holder);  
+				if(last.equals(",")){
+					line = line.concat("0");
+				}
+        		if(i != 0){
+	                // use comma as separator
+	                String[] info = line.split(cvsSplitBy);
+	                info = fill_blanks(info);
+
+	                String player_id = info[0];
+					String year = info[1];
+					String team_id = info[3];
+					String league = info[4];
+
+					Person player = find_person(player_id);
+					// get franchise object that will be reference in record
+					Franchise franchise = find_team(team_id);
+
+
+	                // instantiate franchise record
+	                FieldingRecord record = new FieldingRecord(franchise, league, year);
+
+
+	                String position = info[5];
+					Integer games = Integer.parseInt(info[6]);
+					Integer games_started = Integer.parseInt(info[7]);
+					Integer putouts = Integer.parseInt(info[9]);
+					Integer assists = Integer.parseInt(info[10]);
+					Integer errors = Integer.parseInt(info[11]);
+					Integer double_plays = Integer.parseInt(info[12]);
+					Integer passed_balls = Integer.parseInt(info[13]);
+					Integer wild_pitches = Integer.parseInt(info[14]);
+					Integer stolen_bases = Integer.parseInt(info[15]);
+					Integer caught_stealing = Integer.parseInt(info[16]);
+
+					record.set_stats(position, games, games_started, putouts, assists, errors, double_plays, passed_balls, wild_pitches, stolen_bases, caught_stealing);
+					records.add(record);
+                }
+                i = 1;
+            }
+
+        }
+        catch(IOException e) {
+            e.printStackTrace();
+        }
+ 	}
+
+ // 	String[] info = line.split(cvsSplitBy);
+	// read(line);
+	// info = fill_blanks(info);
 
 
 
 
 
  	public void read_records(){
- 		System.out.println("do stuff");
+ 		read_teams();
+ 		read_batting();
+ 		read_fielding();
+ 		System.out.println(records.size());
  	}
 
 

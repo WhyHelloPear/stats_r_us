@@ -8,8 +8,7 @@ public class Interface{
 		Directory directory = new Directory();
 		directory.read_person();
 		directory.read_franchise();
-		directory.read_teams();
-		directory.read_batting();
+		directory.read_records();
 
 	}
 }
