@@ -1,14 +1,17 @@
+import java.util.*;
+
 public class Franchise{
-	String id;
-	String name;
-	Boolean active;
-	List<String> teams;
+	private String id;
+	private String name;
+	private Boolean active;
+	private List<String> teams;
 	
 
 	public Franchise(String id, String name, Boolean active){
 	    this.id = id;
 	    this.name = name;
 	    this.active = active;
+	    this.teams = new ArrayList<String>();
 	}
 
 	public String get_id(){
@@ -24,8 +27,8 @@ public class Franchise{
 	}
 
 	public void add_team(String id){
-		if(teams.contains(id) == false){
-			teams.add(id);
+		if(this.teams.contains(id) == false){
+			this.teams.add(id);
 		}
 	}
 
