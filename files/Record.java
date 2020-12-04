@@ -1,17 +1,17 @@
-abstract class Record{
+public abstract class Record{
 	String type;
-	Person person;
+	String league;
 	Franchise franchise;
 	String year;
-	List<String> categories;
-	List<String> stats;
 
-
-	public String getType(){
-		return this.type;
+	public Record(Franchise franchise, String league, String year, String type){
+		this.franchise = franchise;
+		this.year = year;
+		this.type = type;
+		this.league = league;
 	}
 
-	public Record getBaseRecord(){
-		return this;
+	public void set_stats(){
+		System.out.println("setting stats for record!");
 	}
 }

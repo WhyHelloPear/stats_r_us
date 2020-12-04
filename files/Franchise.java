@@ -2,6 +2,7 @@ public class Franchise{
 	String id;
 	String name;
 	Boolean active;
+	List<String> teams;
 	
 
 	public Franchise(String id, String name, Boolean active){
@@ -20,6 +21,20 @@ public class Franchise{
 
 	public Boolean is_active(){
 		return this.active;
+	}
+
+	public void add_team(String id){
+		if(teams.contains(id) == false){
+			teams.add(id);
+		}
+	}
+
+	public Boolean contains_team(String id){
+		Boolean value = false;
+		if(teams.contains(id)){
+			value = true;
+		}
+		return value;
 	}
 
 }

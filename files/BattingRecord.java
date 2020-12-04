@@ -1,7 +1,7 @@
-public class BattingRecord extends Record{
+public class BattingRecord extends PlayerRecord{
 
-		BattingRecord(){
-			this.type = "batting";
-		}
+	public BattingRecord(Franchise franchise, String league, String year){
+		super(franchise, league, year, "batting");
+	}
 
 }

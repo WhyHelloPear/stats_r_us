@@ -10,6 +10,7 @@ public class Directory{
 
 	private List<Person> persons = new ArrayList<Person>();
 	private List<Franchise> franchises = new ArrayList<Franchise>();
+	private List<Record> records = new ArrayList<Record>();
 
 
 	private List<String> get_managers(){
@@ -36,6 +37,30 @@ public class Directory{
         }
         return managers;
 	}
+
+	//find franchise object by franchise id
+ 	public Franchise find_franchise(String id){
+ 		Franchise franchise = null;
+ 		for(int i = 0; i < franchises.size(); i++){
+ 			franchise = franchises.get(i);
+ 			if(franchise.get_id().equals(id)){
+ 				break;
+ 			}
+ 		}
+ 		return franchise;
+ 	}
+
+ 	//takes in team id and returns franchise object associated with the team
+ 	public Franchise find_team(String id){
+ 		Franchise franchise = null;
+ 		for(int i = 0; i < franchises.size(); i++){
+ 			franchise = franchises.get(i);
+ 			if(franchise.contains_team(id)){
+ 				break;
+ 			}
+ 		}
+ 		return franchise;
+ 	}
 
  	public void read_person(){
         String line = "";
@@ -159,4 +184,40 @@ public class Directory{
  		}
  		return person;
  	}
+
+ 	//creates franchise records and tracks teams that fall under a franchise
+ 	public void read_teams(){
+ 		String line = "";
+        String cvsSplitBy = ",";
+        Integer i = 0;
+
+        try(BufferedReader br = new BufferedReader(new FileReader("../data/Managers.csv"))) {
+
+            while ((line = br.readLine()) != null) {
+        		if(i != 0){
+	                // use comma as separator
+	                String[] info = line.split(cvsSplitBy);
+	                
+	                //do stuff
+
+                }
+                i = 1;
+            }
+
+        }
+        catch(IOException e) {
+            e.printStackTrace();
+        }
+ 	}
+
+
+
+
+
+
+ 	public void read_records(){
+ 		System.out.println("do stuff");
+ 	}
+
+
 }
