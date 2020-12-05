@@ -26,6 +26,10 @@ public class Franchise{
 		return this.active;
 	}
 
+	public List<String> get_teams(){
+		return this.teams;
+	}
+
 	public void add_team(String id){
 		if(this.teams.contains(id) == false){
 			this.teams.add(id);

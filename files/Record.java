@@ -18,4 +18,12 @@ public abstract class Record{
 	public void get_type(){
 		System.out.println(this.type);
 	}
+
+	public Franchise get_franchise() {
+		return this.franchise;
+	}
+
+	public String get_year() {
+		return this.year;
+	}
 }
